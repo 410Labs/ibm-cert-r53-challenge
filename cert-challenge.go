@@ -46,11 +46,9 @@ type IbmChallenge struct {
 	jwt.StandardClaims
 }
 
-var IbmPubKey = mustDecode([]byte(`
------BEGIN PUBLIC KEY-----
-${PUBLIC_KEY}
------END PUBLIC KEY-----
-`))
+//go:generate go run script/includetxt.go
+
+var IbmPubKey = mustDecode([]byte(ibmpublickey))
 
 func getChallenge(data []byte) (ic IbmChallenge, err error) {
 	var body map[string]string
